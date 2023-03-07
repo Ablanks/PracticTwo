@@ -73,6 +73,23 @@ namespace ConsoleApp5
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             cmd.ExecuteNonQuery();
         }
+        
+        /// <summary>
+        /// Метод GetRightsCategoryQuery
+        /// отправляет запрос в БД на получение списка категории прав
+        /// выводит в консоль данные о категории прав
+        /// </summary>
+        public static void GetRightsCategoryQuery()
+        {
+            var querySql = "SELECT * FROM rights_category";
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine($"Id: {reader[0]} Название категории прав: {reader[1]}");
+            }
+        }
 
         /// <summary>
         /// Метод AddDriverRightsCategoryQuery
@@ -91,13 +108,13 @@ namespace ConsoleApp5
         /// отправляет запрос в БД на получение категорий водителей
         /// выводит в консоль информацию о категориях прав водителей
         /// </summary>
-        public static void GetDriverRightsCategoryQuery(int driver)
+        public static void GetDriverRightsCategoryQuery()
         {
+            
             var querySql = "SELECT dr.first_name, dr.last_name, rc.name " +
                            "FROM driver_rights_category " +
                            "INNER JOIN driver dr on driver_rights_category.id_driver = dr.id " +
-                           "INNER JOIN rights_category rc on rc.id = driver_rights_category.id_rights_category " +
-                           $"WHERE dr.id = {driver};";
+                           "INNER JOIN rights_category rc on rc.id = driver_rights_category.id_rights_category ";
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             using var reader = cmd.ExecuteReader();
 
@@ -105,6 +122,71 @@ namespace ConsoleApp5
             {
                 Console.WriteLine($"Имя: {reader[0]} Фамилия: {reader[1]} Категория прав: {reader[2]}");
             }
+        }
+        
+        
+        public static void AddCarQuery(int type, string name, string stateName, int numberSeats)
+        {
+            var querySql =
+                $"INSERT INTO car(id_type_car, name, state_number, number_passengers) VALUES ({type}, {name}, {stateName}, {numberSeats})";
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            cmd.ExecuteNonQuery();
+        }
+        public static void GetCarQuery()
+        {
+            var querySql = "SELECT A.id, tc.name, A.name, state_number, number_passengers FROM car A" +
+                           " INNER JOIN type_car tc on A.id_type_car = tc.id"; 
+
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine($"Id {reader[0]}, Тип {reader[1]}, название {reader[2]}, штатный номер {reader[3]}, количество посадочных мест {reader[4]}");
+            }
+        }
+        
+        public static void GetItineraryQuery()
+        {
+            var querySql = "SELECT * FROM Itinerary"; 
+
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine($"Id {reader[0]}, название маршрута {reader[1]}");
+            }
+        }
+        
+        public static void AddItineraryQuery(string name)
+        {
+            var querySql = $"INSERT INTO itinerary(name) VALUES ('{name}')";
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            cmd.ExecuteNonQuery();;
+        }
+        
+        public static void GetRouteQuery()
+        {
+            var querySql = "SELECT A.id, dr.first_name, dr.last_name, cr.name, it.name, A.number_passengers From route A" +
+                           " INNER JOIN driver dr on A.id_driver = dr.id " +
+                           " INNER JOIN car cr on A.id_car = cr.id " +
+                           " INNER JOIN itinerary it on A.id_itinerary = it.id "; 
+
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine($"Id {reader[0]} Имя {reader[1]}, Фамилия {reader[2]}, Машина {reader[3]}, Маршрут {reader[4]}, Число пассажиров {reader[5]}");
+            }
+        }
+        
+        public static void AddRouteQuery(int driverId, int carId,int itineraryId, int numberPassengers)
+        {
+            var querySql = $"INSERT INTO route(id_driver, id_car, id_itinerary, number_passengers) VALUES ('{driverId}, {carId}, {itineraryId}, {numberPassengers}')";
+            using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
+            cmd.ExecuteNonQuery();;
         }
     }
 }

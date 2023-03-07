@@ -2,7 +2,7 @@ using Npgsql;
 
 namespace ConsoleApp5
 {
-    public class DatabaseService
+    public static class DatabaseService
     {
         private static NpgsqlConnection? _connection;
         /// <summary>
