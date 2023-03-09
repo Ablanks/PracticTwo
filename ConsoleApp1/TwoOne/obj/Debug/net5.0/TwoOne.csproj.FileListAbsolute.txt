@@ -1,0 +1,16 @@
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.exe
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.deps.json
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.runtimeconfig.json
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.runtimeconfig.dev.json
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.dll
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\ref\TwoOne.dll
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\TwoOne.pdb
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.csprojAssemblyReference.cache
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.AssemblyInfoInputs.cache
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.AssemblyInfo.cs
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.csproj.CoreCompileInputs.cache
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.dll
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\ref\TwoOne.dll
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.pdb
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.genruntimeconfig.cache
