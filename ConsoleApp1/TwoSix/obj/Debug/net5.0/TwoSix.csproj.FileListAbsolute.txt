@@ -16,3 +16,4 @@ C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoSix\obj\Debug\net5.0\TwoSix.dl
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoSix\obj\Debug\net5.0\ref\TwoSix.dll
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoSix\obj\Debug\net5.0\TwoSix.pdb
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoSix\obj\Debug\net5.0\TwoSix.genruntimeconfig.cache
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoSix\bin\Debug\net5.0\Microsoft.Office.Interop.Word.dll

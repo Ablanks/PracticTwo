@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "KVbUHUhDVMSXWHswFo9UQ+Q3rw6BC7vCI5+6kofXJtNec2yEs1riI4LGCMbPifIogM/ypdkq1wbcyspHKbwj6A==",
+  "dgSpecHash": "CszUXWTEDnvb5GVmP8jURYb8AKW0jeernkg03ilisBrpZPj/T4AimKdi26rbIWYR8CZCuQjzveFrs8CtcMmijQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\gr621_praev\\RiderProjects\\ConsoleApp1\\TwoThree\\TwoThree.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.office.interop.word\\15.0.4797.1004\\microsoft.office.interop.word.15.0.4797.1004.nupkg.sha512"
+  ],
   "logs": []
 }

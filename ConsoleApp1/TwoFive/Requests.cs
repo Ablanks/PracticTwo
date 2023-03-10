@@ -6,7 +6,7 @@ namespace ConsoleApp5
 {
     public static class DatabaseRequests
     {
-        public static void GetTypeCarQuery()
+        public static string GetTypeCarQuery()
         {
             // Сохраняем в переменную запрос на получение всех данных и таблицы type_car
             var querySql = "SELECT * FROM type_car";
@@ -15,12 +15,14 @@ namespace ConsoleApp5
             // Выполняем команду(запрос)
             // результат команды сохранится в переменную reader
             using var reader = cmd.ExecuteReader();
-
+            string s = "";
             // Выводим данные которые вернула БД
             while (reader.Read())
             {
-                Console.WriteLine($"Id: {reader[0]} Название: {reader[1]}");
+                s += $"Id: {reader[0]} Название: {reader[1]} \n";
             }
+
+            return s;
         }
 
         /// <summary>
@@ -51,16 +53,18 @@ namespace ConsoleApp5
         /// отправляет запрос в БД на получение списка водителей
         /// выводит в консоль данные о водителях
         /// </summary>
-        public static void GetDriverQuery()
+        public static string GetDriverQuery()
         {
             var querySql = "SELECT * FROM driver";
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             using var reader = cmd.ExecuteReader();
-
+            string s = "";
             while (reader.Read())
             {
-                Console.WriteLine($"Id: {reader[0]} Имя: {reader[1]} Фамилия: {reader[2]} Дата рождения: {reader[3]}");
+                s += $"Id: {reader[0]} Имя: {reader[1]} Фамилия: {reader[2]} Дата рождения: {reader[3]} \n";
             }
+
+            return s;
         }
 
         /// <summary>
@@ -132,18 +136,20 @@ namespace ConsoleApp5
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             cmd.ExecuteNonQuery();
         }
-        public static void GetCarQuery()
+        public static string GetCarQuery()
         {
             var querySql = "SELECT A.id, tc.name, A.name, state_number, number_passengers FROM car A" +
                            " INNER JOIN type_car tc on A.id_type_car = tc.id"; 
 
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             using var reader = cmd.ExecuteReader();
-
+            string s = "";
             while (reader.Read())
             {
-                Console.WriteLine($"Id {reader[0]}, Тип {reader[1]}, название {reader[2]}, штатный номер {reader[3]}, количество посадочных мест {reader[4]}");
+                s += $"Id {reader[0]}, Тип {reader[1]}, название {reader[2]}, штатный номер {reader[3]}, количество посадочных мест {reader[4]} \n";
             }
+
+            return s;
         }
         
         public static void GetItineraryQuery()
@@ -166,7 +172,7 @@ namespace ConsoleApp5
             cmd.ExecuteNonQuery();;
         }
         
-        public static void GetRouteQuery()
+        public static string GetRouteQuery()
         {
             var querySql = "SELECT A.id, dr.first_name, dr.last_name, cr.name, it.name, A.number_passengers From route A" +
                            " INNER JOIN driver dr on A.id_driver = dr.id " +
@@ -175,11 +181,13 @@ namespace ConsoleApp5
 
             using var cmd = new NpgsqlCommand(querySql, DatabaseService.GetSqlConnection());
             using var reader = cmd.ExecuteReader();
-
+            string s = "";
             while (reader.Read())
             {
-                Console.WriteLine($"Id {reader[0]} Имя {reader[1]}, Фамилия {reader[2]}, Машина {reader[3]}, Маршрут {reader[4]}, Число пассажиров {reader[5]}");
+                s += $"Id {reader[0]} Имя {reader[1]}, Фамилия {reader[2]}, Машина {reader[3]}, Маршрут {reader[4]}, Число пассажиров {reader[5]} \n";
             }
+
+            return s;
         }
         
         public static void AddRouteQuery(int driverId, int carId,int itineraryId, int numberPassengers)

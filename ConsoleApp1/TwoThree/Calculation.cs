@@ -8,7 +8,7 @@ namespace ConsoleApp2
 
         public void SetCalculationLine(string line)
         {
-            this.calculationLine = line;
+            calculationLine = line;
         }
 
         public string SetLastCalculationLine
@@ -34,7 +34,7 @@ namespace ConsoleApp2
 
         public void DeleteLastSymbol()
         {
-            this.calculationLine = calculationLine.Remove(calculationLine.Length - 1);
+            calculationLine = calculationLine.Remove(calculationLine.Length - 1);
         }
     }
 }

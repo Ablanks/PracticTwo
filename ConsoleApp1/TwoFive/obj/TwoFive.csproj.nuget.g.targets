@@ -5,5 +5,6 @@
     <Import Project="$(NuGetPackageRoot)system.text.encodings.web\7.0.0\buildTransitive\netcoreapp2.0\System.Text.Encodings.Web.targets" Condition="Exists('$(NuGetPackageRoot)system.text.encodings.web\7.0.0\buildTransitive\netcoreapp2.0\System.Text.Encodings.Web.targets')" />
     <Import Project="$(NuGetPackageRoot)system.text.json\7.0.2\buildTransitive\netcoreapp2.0\System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json\7.0.2\buildTransitive\netcoreapp2.0\System.Text.Json.targets')" />
     <Import Project="$(NuGetPackageRoot)system.collections.immutable\7.0.0\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets" Condition="Exists('$(NuGetPackageRoot)system.collections.immutable\7.0.0\buildTransitive\netcoreapp2.0\System.Collections.Immutable.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
   </ImportGroup>
 </Project>

@@ -92,7 +92,6 @@ namespace ConsoleApp2
             WeatherData data = JsonConvert.DeserializeObject<WeatherData>(json);
             string weatherMain = data.weather[0].description;
             string windDirection = GetWindDirection(data.wind.deg);
-
             Console.WriteLine($"{data.name}, температура {data.main.temp}, ощущается как {data.main.feels_like}," +
                               $" {weatherMain}, процент облачности воздуха {data.clouds.all} %, атмосферное давление {data.main.pressure} гПа," +
                               $" относительная влажность воздуха {data.main.humidity} %");

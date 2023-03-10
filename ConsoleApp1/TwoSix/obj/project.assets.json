@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "Microsoft.Office.Interop.Word/15.0.4797.1004": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Word.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.Word.dll": {}
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -14,6 +23,19 @@
     }
   },
   "libraries": {
+    "Microsoft.Office.Interop.Word/15.0.4797.1004": {
+      "sha512": "lavTOrMGK/o/t3+gGr7JuVrL8XDdnS0DwPLcYv/StOiysXO4L0C36IXTVtEJo1Mh9Aoxo9a8dgGcPi+faTlv0g==",
+      "type": "package",
+      "path": "microsoft.office.interop.word/15.0.4797.1004",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/Microsoft.Office.Interop.Word.dll",
+        "lib/netstandard2.0/Microsoft.Office.Interop.Word.dll",
+        "microsoft.office.interop.word.15.0.4797.1004.nupkg.sha512",
+        "microsoft.office.interop.word.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.3": {
       "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
@@ -47,6 +69,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.Office.Interop.Word >= 15.0.4797.1004",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
@@ -96,6 +119,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.Office.Interop.Word": {
+            "target": "Package",
+            "version": "[15.0.4797.1004, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"

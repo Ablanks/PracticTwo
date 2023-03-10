@@ -45,9 +45,21 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.1.3, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[8.0.0-preview.1, )"
+            },
+            "Open-XML-SDK": {
+              "target": "Package",
+              "version": "[2.9.1, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[7.2.5, )"
             }
           },
           "imports": [
