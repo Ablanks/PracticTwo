@@ -8,6 +8,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net;
+using Quartz;
+using Quartz.Impl;
 using Telegram.Bot.Types.Enums;
 
 public class WeatherData
@@ -100,8 +102,8 @@ namespace ConsoleApp2
     class Program
     {
         static ITelegramBotClient bot = new TelegramBotClient("6017130190:AAHkzgOBB1iYZkMRQbs96pcMjLl4eBdlpkw");
+        private static Dictionary<long, string> values = new Dictionary<long, string>();
         
-        static string gd = "";
         static private string GetWindDirection(int degrees)
         {
             string[] directions = { "С", "ССВ", "СВ", "ВСВ", "В", "ВЮВ", "ЮВ", "ЮЮВ", "Ю", "ЮЮЗ", "ЮЗ", "ЗЮЗ", "З", "ЗСЗ", "СЗ", "ССЗ" };
@@ -123,10 +125,10 @@ namespace ConsoleApp2
             return s;
         }
 
-        static private (double, double) Place()
+        static private (double, double) Place(string s)
         {
             string url = 
-                $"https://api.geoapify.com/v1/geocode/search?text=новосибирск&apiKey=786944f1db4349f9858745d19e756b49";
+                $"https://api.geoapify.com/v1/geocode/search?text={s}apiKey=786944f1db4349f9858745d19e756b49";
             string json = new WebClient().DownloadString(url);
             FeatureCollection featureCollection = JsonConvert.DeserializeObject<FeatureCollection>(json);
 
@@ -138,7 +140,6 @@ namespace ConsoleApp2
         public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
             CancellationToken cancellationToken)
         {
-            // Некоторые действия
             Console.WriteLine(JsonConvert.SerializeObject(update));
             if (update.Type == UpdateType.Message)
             {
@@ -158,12 +159,36 @@ namespace ConsoleApp2
                     Console.WriteLine("Вызов погоды");
                     string telegramMessage = "Текущая погода в городе " + Forecast();
                     await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
-                        parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
+                        parseMode: ParseMode.Html);
                 }
 
                 if (codeOfButton == "defaultCity")
                 {
                     Console.WriteLine("Запрос на смену города");
+                    string telegramMessage = "Выберите город по умолчанию";
+                    await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
+                        parseMode: ParseMode.Html);
+                    if (update.Type == UpdateType.Message)
+                    {
+                        var chatId = update.Message.Chat.Id;
+                        var value = update.Message.Text;
+
+                        if (!values.ContainsKey(chatId))
+                        {
+                            values[chatId] = value;
+                            await botClient.SendTextMessageAsync(chatId, $"Значение {value} сохранено!");
+                        }
+                        else
+                        {
+                            values[chatId] = value;
+                            await botClient.SendTextMessageAsync(chatId, $"Значение {value} обновлено!");
+                        }
+                    }
+                }
+
+                if (codeOfButton == "defaultNotification")
+                {
+                    
                 }
             }
         }
@@ -182,14 +207,14 @@ namespace ConsoleApp2
                 new[]
                 {
                     // first row
-                  /*  new[]
+                    new[]
                     {
                         // first button in row
                         InlineKeyboardButton.WithCallbackData(text: "Поменять текущий город", callbackData: "defaultCity"),
                         // second button in row
-                        InlineKeyboardButton.WithCallbackData(text: "Поменять время отправления уведомлений", callbackData: "defaultNotification"),
+                       // InlineKeyboardButton.WithCallbackData(text: "Поменять время отправления уведомлений", callbackData: "defaultNotification"),
                     },
-                    */// second row
+                    // second row
                     new[]
                     {
                         // first button in row
@@ -204,14 +229,22 @@ namespace ConsoleApp2
                 replyMarkup: inlineKeyboard,
                 cancellationToken: cancellationToken);
         }
-
-
         
+        public class SendMessageJob : IJob
+        {
+            public async Task Execute(IJobExecutionContext context)
+            {
+                foreach (var chatid in values.Keys)
+                {
+                    var message = "Привет, это сообщение отправлено по расписанию! \n" +
+                                  "Погода в городе " + Place(values[chatid]) + Forecast();
+                    await bot.SendTextMessageAsync(chatid, message);
+                }
+            }
+        }
         
-        
-    
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Запущен бот " + bot.GetMeAsync().Result.FirstName);
             var cts = new CancellationTokenSource();
@@ -220,12 +253,34 @@ namespace ConsoleApp2
             {
                 AllowedUpdates = { }, // receive all update types
             };
+            var factory = new StdSchedulerFactory();
+            var scheduler = await factory.GetScheduler();
+
+            await scheduler.Start();
+
+            var job = JobBuilder.Create<SendMessageJob>()
+                .Build();
+
+            var trigger = TriggerBuilder.Create()
+                .WithIdentity("trigger1", "group1")
+                .StartNow()
+                .WithDailyTimeIntervalSchedule
+                (s =>
+                    s.WithIntervalInHours(24)
+                        .OnEveryDay()
+                        .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(9, 20))
+                )
+                .Build();
+            
+
+            await scheduler.ScheduleJob(job, trigger);
             bot.StartReceiving(
                 HandleUpdateAsync,
                 HandleErrorAsync,
                 receiverOptions,
                 cancellationToken
             );
+            
             Console.ReadLine();
         }
     }
