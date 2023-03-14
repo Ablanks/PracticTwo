@@ -82,38 +82,22 @@ public class Sys
     public int sunset { get; set; }
 }
 
-public class FeatureProperties
-{
-    public double lon { get; set; }
-    public double lat { get; set; }
-}
-
-public class Feature
-{
-    public FeatureProperties properties { get; set; }
-}
-
-public class FeatureCollection
-{
-    public List<Feature> features { get; set; }
-}
 namespace ConsoleApp2
 {
     class Program
     {
         static ITelegramBotClient bot = new TelegramBotClient("6017130190:AAHkzgOBB1iYZkMRQbs96pcMjLl4eBdlpkw");
-        private static Dictionary<long, string> values = new Dictionary<long, string>();
         
         static private string GetWindDirection(int degrees)
         {
             string[] directions = { "С", "ССВ", "СВ", "ВСВ", "В", "ВЮВ", "ЮВ", "ЮЮВ", "Ю", "ЮЮЗ", "ЮЗ", "ЗЮЗ", "З", "ЗСЗ", "СЗ", "ССЗ" };
-            return directions[(int)Math.Round(((double)degrees % 360) / 22.5)];
+            return directions[(int)Math.Round((double)degrees % 360 / 22.5)];
         }
 
-        static private string Forecast()
+        static private string Forecast(string b)
         {
-            var (lon, lan) = Place();
-            string url = $"https://api.openweathermap.org/data/2.5/weather?lat={lon}&lon={lan}&units=metric&lang=ru&appid=cb1fe9bc41347598cd02c36d7d71b6ee";
+            string url = $"https://api.openweathermap.org/data/2.5/weather?q={b}" +
+                         $"&units=metric&lang=ru&appid=cb1fe9bc41347598cd02c36d7d71b6ee";
             string json = new WebClient().DownloadString(url);
             WeatherData data = JsonConvert.DeserializeObject<WeatherData>(json);
             string weatherMain = data.weather[0].description;
@@ -124,19 +108,7 @@ namespace ConsoleApp2
                               $" относительная влажность воздуха {data.main.humidity} % \n" + $"cкорость ветра {data.wind.speed}, направление {windDirection}";
             return s;
         }
-
-        static private (double, double) Place(string s)
-        {
-            string url = 
-                $"https://api.geoapify.com/v1/geocode/search?text={s}apiKey=786944f1db4349f9858745d19e756b49";
-            string json = new WebClient().DownloadString(url);
-            FeatureCollection featureCollection = JsonConvert.DeserializeObject<FeatureCollection>(json);
-
-            double longitude = featureCollection.features[0].properties.lon;
-            double latitude = featureCollection.features[0].properties.lat;
-            return (latitude, longitude);
-        }
-
+        
         public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
             CancellationToken cancellationToken)
         {
@@ -144,6 +116,7 @@ namespace ConsoleApp2
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
+                DatabaseRequests.AddUser(message.Chat.Id);
                 if (message.Text == "/start")
                 {
                     SendInline(botClient: botClient, chatId: message.Chat.Id, cancellationToken: cancellationToken);
@@ -157,7 +130,7 @@ namespace ConsoleApp2
                 if (codeOfButton == "weather")
                 {
                     Console.WriteLine("Вызов погоды");
-                    string telegramMessage = "Текущая погода в городе " + Forecast();
+                    string telegramMessage = "Текущая погода в городе " + Forecast("Tomsk");
                     await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
                         parseMode: ParseMode.Html);
                 }
@@ -165,24 +138,14 @@ namespace ConsoleApp2
                 if (codeOfButton == "defaultCity")
                 {
                     Console.WriteLine("Запрос на смену города");
-                    string telegramMessage = "Выберите город по умолчанию";
+                    string telegramMessage = "Напишите город по умолчанию";
                     await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
                         parseMode: ParseMode.Html);
                     if (update.Type == UpdateType.Message)
                     {
-                        var chatId = update.Message.Chat.Id;
-                        var value = update.Message.Text;
-
-                        if (!values.ContainsKey(chatId))
-                        {
-                            values[chatId] = value;
-                            await botClient.SendTextMessageAsync(chatId, $"Значение {value} сохранено!");
-                        }
-                        else
-                        {
-                            values[chatId] = value;
-                            await botClient.SendTextMessageAsync(chatId, $"Значение {value} обновлено!");
-                        }
+                        DatabaseRequests.UpdUser("Москва", update.CallbackQuery.Message.Chat.Id);
+                        Console.WriteLine("Москва");
+                        return;
                     }
                 }
 
@@ -194,12 +157,12 @@ namespace ConsoleApp2
         }
 
 
-
         public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             // Некоторые действия
             Console.WriteLine(JsonConvert.SerializeObject(exception));
         }
+        
         public static async void SendInline(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
         {
             InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
@@ -225,7 +188,7 @@ namespace ConsoleApp2
 
             Message sentMessage = await botClient.SendTextMessageAsync(
                 chatId: chatId,
-                text: "Привет",
+                text: "Привет, чем могу помочь?",
                 replyMarkup: inlineKeyboard,
                 cancellationToken: cancellationToken);
         }
@@ -234,15 +197,12 @@ namespace ConsoleApp2
         {
             public async Task Execute(IJobExecutionContext context)
             {
-                foreach (var chatid in values.Keys)
-                {
-                    var message = "Привет, это сообщение отправлено по расписанию! \n" +
-                                  "Погода в городе " + Place(values[chatid]) + Forecast();
-                    await bot.SendTextMessageAsync(chatid, message);
-                }
+
+                var mess = "Привет, это сообщение отправлено по расписанию! \n" +
+                           "Погода в городе ";
+                    await bot.SendTextMessageAsync(5345, mess);
             }
         }
-        
 
         static async Task Main(string[] args)
         {
@@ -280,7 +240,6 @@ namespace ConsoleApp2
                 receiverOptions,
                 cancellationToken
             );
-            
             Console.ReadLine();
         }
     }
