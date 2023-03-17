@@ -14,3 +14,5 @@ C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.dl
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\ref\TwoOne.dll
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.pdb
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.genruntimeconfig.cache
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\bin\Debug\net5.0\Microsoft.Office.Interop.Word.dll
+C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoOne\obj\Debug\net5.0\TwoOne.csproj.CopyComplete

@@ -1,28 +1,24 @@
 ﻿using System;
 
-namespace ConsoleApp2
+namespace ConsoleApp3
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // 1-2
-            /* 
-            Workers worker = new Workers();
-            worker.Name = "Андрей";
-            worker.Surname = "Пронь";
-            worker.Days = 40;
-            worker.Rate = 300;
-            Console.WriteLine(worker.GetSalary());
-            */
-            // 3
-            Calculation calculate = new Calculation();
-            calculate.SetCalculationLine("125");
-            calculate.SetLastCalculationLine = "1";
-            calculate.GetCalculationLine();
-            Console.WriteLine(calculate.GetLastSymbole);
-            calculate.DeleteLastSymbol();
-            calculate.GetCalculationLine();
+            //DatabaseRequests.AddTypeCarQuery("Космический");
+            Console.WriteLine(DatabaseRequests.GetTypeCarQuery());
+            //DatabaseRequests.AddDriverQuery("Семён", "Неяскин", DateTime.Parse("2000.05.21"));
+            Console.WriteLine();
+            Console.WriteLine(DatabaseRequests.GetDriverQuery());
+            Console.WriteLine();
+            //DatabaseRequests.AddRightsCategoryQuery("М");
+            DatabaseRequests.GetRightsCategoryQuery();
+            Console.WriteLine();
+           // DatabaseRequests.AddDriverRightsCategoryQuery(6, 1);
+            DatabaseRequests.GetDriverRightsCategoryQuery();
+            Console.WriteLine();
+            
         }
     }
 }

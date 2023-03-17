@@ -1,8 +1,31 @@
 {
   "version": 2,
-  "dgSpecHash": "X9DazZmh0tUxhhA9tZGQvKbml+NoTcL5gl2LmkuJMd6R+/Xm28wo2Y3yXU6aBaMNNnoAgZkkX6/oK/QxxiBLow==",
+  "dgSpecHash": "z/Kypz05TL3ebsZmwVCbbd4eKEfAz19hOo80Px8YqoFaPImLdKSMwzHnhxG25/+ZrJBQ/fD4GX26nukM3m6DRQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\gr621_praev\\RiderProjects\\ConsoleApp1\\ConsoleApp3\\ConsoleApp3.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0-preview.5.21301.9\\microsoft.entityframeworkcore.6.0.0-preview.5.21301.9.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0-preview.5.21301.9\\microsoft.entityframeworkcore.abstractions.6.0.0-preview.5.21301.9.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.0-preview.5.21301.9\\microsoft.entityframeworkcore.analyzers.6.0.0-preview.5.21301.9.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.0-preview.5.21301.9\\microsoft.entityframeworkcore.design.6.0.0-preview.5.21301.9.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.0-preview.5.21301.9\\microsoft.entityframeworkcore.relational.6.0.0-preview.5.21301.9.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0-preview.5.21301.5\\microsoft.extensions.caching.abstractions.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.0-preview.5.21301.5\\microsoft.extensions.caching.memory.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0-preview.5.21301.5\\microsoft.extensions.configuration.abstractions.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0-preview.5.21301.5\\microsoft.extensions.dependencyinjection.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0-preview.5.21301.5\\microsoft.extensions.dependencyinjection.abstractions.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0-preview.5.21301.5\\microsoft.extensions.logging.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0-preview.5.21301.5\\microsoft.extensions.logging.abstractions.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.options\\6.0.0-preview.5.21301.5\\microsoft.extensions.options.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0-preview.5.21301.5\\microsoft.extensions.primitives.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\npgsql\\6.0.0-preview4\\npgsql.6.0.0-preview4.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.0-preview4\\npgsql.entityframeworkcore.postgresql.6.0.0-preview4.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\system.collections.immutable\\6.0.0-preview.5.21301.5\\system.collections.immutable.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0-preview.5.21301.5\\system.diagnostics.diagnosticsource.6.0.0-preview.5.21301.5.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\gr621_praev\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0-preview.5.21301.5\\system.runtime.compilerservices.unsafe.6.0.0-preview.5.21301.5.nupkg.sha512"
+  ],
   "logs": []
 }

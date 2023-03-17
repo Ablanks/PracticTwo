@@ -70,7 +70,7 @@ namespace ConsoleApp5
                 DatabaseRequests.GetTypeCarQuery();
             }
             Console.WriteLine("Автомобили");
-            DatabaseRequests.GetCarQuery();
+            Console.WriteLine(DatabaseRequests.GetCarQuery());
             Console.WriteLine();
             
             
@@ -84,7 +84,7 @@ namespace ConsoleApp5
             }
             
             Console.WriteLine("Водители");
-            DatabaseRequests.GetDriverQuery();
+            Console.WriteLine(DatabaseRequests.GetDriverQuery());
             Console.WriteLine();
             
             Console.WriteLine("Хотите добавить нового водителя?");

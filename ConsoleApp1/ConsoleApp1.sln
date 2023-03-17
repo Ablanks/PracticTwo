@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoFive", "TwoFive\TwoFive.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoSix", "TwoSix\TwoSix.csproj", "{EB62B5FD-1690-4EC4-9C84-F32E4BD1437E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{2E43351D-2AE2-41E4-914C-CCE4CFF18218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp3", "ConsoleApp3\ConsoleApp3.csproj", "{6A593DA4-628B-4498-9F06-AB5082DE837D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{EB62B5FD-1690-4EC4-9C84-F32E4BD1437E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB62B5FD-1690-4EC4-9C84-F32E4BD1437E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB62B5FD-1690-4EC4-9C84-F32E4BD1437E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E43351D-2AE2-41E4-914C-CCE4CFF18218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E43351D-2AE2-41E4-914C-CCE4CFF18218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E43351D-2AE2-41E4-914C-CCE4CFF18218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E43351D-2AE2-41E4-914C-CCE4CFF18218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A593DA4-628B-4498-9F06-AB5082DE837D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A593DA4-628B-4498-9F06-AB5082DE837D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A593DA4-628B-4498-9F06-AB5082DE837D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A593DA4-628B-4498-9F06-AB5082DE837D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

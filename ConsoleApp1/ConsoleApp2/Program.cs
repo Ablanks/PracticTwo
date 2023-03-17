@@ -88,16 +88,16 @@ namespace ConsoleApp2
     {
         static ITelegramBotClient bot = new TelegramBotClient("6017130190:AAHkzgOBB1iYZkMRQbs96pcMjLl4eBdlpkw");
         
-        static private string GetWindDirection(int degrees)
+        private static string GetWindDirection(int degrees)
         {
             string[] directions = { "С", "ССВ", "СВ", "ВСВ", "В", "ВЮВ", "ЮВ", "ЮЮВ", "Ю", "ЮЮЗ", "ЮЗ", "ЗЮЗ", "З", "ЗСЗ", "СЗ", "ССЗ" };
             return directions[(int)Math.Round((double)degrees % 360 / 22.5)];
         }
 
-        static private string Forecast(string b)
+        private static string Forecast(string b)
         {
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={b}" +
-                         $"&units=metric&lang=ru&appid=cb1fe9bc41347598cd02c36d7d71b6ee";
+                         "&units=metric&lang=ru&appid=cb1fe9bc41347598cd02c36d7d71b6ee";
             string json = new WebClient().DownloadString(url);
             WeatherData data = JsonConvert.DeserializeObject<WeatherData>(json);
             string weatherMain = data.weather[0].description;
@@ -105,14 +105,17 @@ namespace ConsoleApp2
             string s = "";
             s += $"{data.name}, температура {data.main.temp}, ощущается как {data.main.feels_like}," +
                               $" {weatherMain}, процент облачности воздуха {data.clouds.all} %, атмосферное давление {data.main.pressure} гПа," +
-                              $" относительная влажность воздуха {data.main.humidity} % \n" + $"cкорость ветра {data.wind.speed}, направление {windDirection}";
+                              $" относительная влажность воздуха {data.main.humidity} % \n" + 
+                              $"cкорость ветра {data.wind.speed}, направление {windDirection}";
             return s;
         }
         
-        public static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
+        private static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update,
             CancellationToken cancellationToken)
         {
             Console.WriteLine(JsonConvert.SerializeObject(update));
+            bool af = false;
+            back:
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
@@ -122,7 +125,12 @@ namespace ConsoleApp2
                     SendInline(botClient: botClient, chatId: message.Chat.Id, cancellationToken: cancellationToken);
                     return;
                 }
+
+                DatabaseRequests.UpdUser(update.Message.Text, update.Message.Chat.Id);
+                
             }
+            
+            
 
             if (update.Type == UpdateType.CallbackQuery)
             {
@@ -130,7 +138,7 @@ namespace ConsoleApp2
                 if (codeOfButton == "weather")
                 {
                     Console.WriteLine("Вызов погоды");
-                    string telegramMessage = "Текущая погода в городе " + Forecast("Tomsk");
+                    string telegramMessage = "Текущая погода в городе " + Forecast("Томск");
                     await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
                         parseMode: ParseMode.Html);
                 }
@@ -141,12 +149,7 @@ namespace ConsoleApp2
                     string telegramMessage = "Напишите город по умолчанию";
                     await botClient.SendTextMessageAsync(chatId: update.CallbackQuery.Message.Chat.Id, telegramMessage,
                         parseMode: ParseMode.Html);
-                    if (update.Type == UpdateType.Message)
-                    {
-                        DatabaseRequests.UpdUser("Москва", update.CallbackQuery.Message.Chat.Id);
-                        Console.WriteLine("Москва");
-                        return;
-                    }
+
                 }
 
                 if (codeOfButton == "defaultNotification")
@@ -154,16 +157,18 @@ namespace ConsoleApp2
                     
                 }
             }
+
+
         }
 
 
-        public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+        private static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             // Некоторые действия
             Console.WriteLine(JsonConvert.SerializeObject(exception));
         }
         
-        public static async void SendInline(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
+        private static async void SendInline(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
         {
             InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(
                 // keyboard
@@ -193,7 +198,7 @@ namespace ConsoleApp2
                 cancellationToken: cancellationToken);
         }
         
-        public class SendMessageJob : IJob
+        private class SendMessageJob : IJob
         {
             public async Task Execute(IJobExecutionContext context)
             {
@@ -204,7 +209,7 @@ namespace ConsoleApp2
             }
         }
 
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Console.WriteLine("Запущен бот " + bot.GetMeAsync().Result.FirstName);
             var cts = new CancellationTokenSource();

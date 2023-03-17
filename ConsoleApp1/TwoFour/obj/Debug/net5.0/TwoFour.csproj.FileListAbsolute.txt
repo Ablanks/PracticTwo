@@ -14,7 +14,5 @@ C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\obj\Debug\net5.0\TwoFour.
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\obj\Debug\net5.0\ref\TwoFour.dll
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\obj\Debug\net5.0\TwoFour.pdb
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\obj\Debug\net5.0\TwoFour.genruntimeconfig.cache
-C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\bin\Debug\net5.0\BouncyCastle.Crypto.dll
-C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\bin\Debug\net5.0\itextsharp.dll
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\bin\Debug\net5.0\Microsoft.Office.Interop.Word.dll
 C:\Users\gr621_praev\RiderProjects\ConsoleApp1\TwoFour\obj\Debug\net5.0\TwoFour.csproj.CopyComplete

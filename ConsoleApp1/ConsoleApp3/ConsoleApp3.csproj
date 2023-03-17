@@ -3,7 +3,15 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>ConsoleApp2</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-preview.5.21301.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0-preview.5.21301.9">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0-preview4" />
+    </ItemGroup>
 
 </Project>

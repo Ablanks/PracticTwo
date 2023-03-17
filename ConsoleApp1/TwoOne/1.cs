@@ -26,8 +26,8 @@ namespace ConsoleApp1
             Console.Write(count);
             */
             
-            int[] nums = { 10, 1, 2, 7, 6, 1, 5 };
-            int target = 8;
+            int[] nums = { 10, 1, 39, 7, 6, 1, 5 };
+            int target = 50;
 
             List<List<int>> result = CombinationSum(nums, target);
 
@@ -77,7 +77,9 @@ namespace ConsoleApp1
             if (target == 0)
             {
                 result.Add(new List<int>(current)); 
+                
                 return;
+                
             }
 
             for (int i = start; i < candidates.Length && candidates[i] <= target; i++)
@@ -90,6 +92,7 @@ namespace ConsoleApp1
                 current.Add(candidates[i]);
                 FindCombinations(candidates, target - candidates[i], current, result, i + 1);
                 current.RemoveAt(current.Count - 1);
+
             }
         }
     }
